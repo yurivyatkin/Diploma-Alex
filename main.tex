@@ -1,0 +1,76 @@
+% From https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1):_Basic_Structure 
+\documentclass[12pt,twoside]{report}
+
+%Russian-specific packages
+%--------------------------------------
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{csquotes}
+%--------------------------------------
+
+%Hyphenation rules
+%--------------------------------------
+\usepackage{hyphenat}
+\hyphenation{ма-те-ма-ти-ка вос-ста-нав-ли-вать}
+%--------------------------------------
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{Оптимальная торговля зерном}
+\setlength{\headheight}{15pt}% https://tex.stackexchange.com/a/327298/7775
+\fancyfoot{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{Глава \thechapter}
+\fancyfoot[CO,RE]{А.О.Дрянова}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage[style=authoryear,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+\title{Дипломная работа}
+\author{Александра Дрянова}
+\date{Май 2019}
+
+\begin{document}
+
+\input{titlepage}
+
+\tableofcontents
+
+%\listoffigures
+
+%\listoftables
+
+\chapter{Введение}
+\input{chapters/introduction}
+
+\chapter{Основные понятия и теоремы}
+\input{chapters/chapter02}
+
+\chapter{Исходная задача и ее решение}
+\input{chapters/chapter03}
+
+\chapter{Варианты задачи и решения}
+\input{chapters/chapter04}
+
+\chapter{Заключение}
+\input{chapters/conclusion}
+
+\appendix
+\chapter{Приложение: Полезные формулы}
+\input{chapters/appendix}
+
+\printbibliography
+
+\end{document}
