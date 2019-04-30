@@ -1,38 +1,142 @@
-\section{Section Title}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\section{Задача оптимальной торговли зерном.}
 
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph1}
-        \caption{$y=x$}
-        \label{fig:y equals x}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph2}
-        \caption{$y=3sinx$}
-        \label{fig:three sin x}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{graph3}
-        \caption{$y=5/x$}
-        \label{fig:five over x}
-    \end{subfigure}
-    \caption{Three simple graphs}
-    \label{fig:three graphs}
-\end{figure}
+Рассмотрим фирму, которая покупает и продает пшеницу. Единственный активы фирмы - денежных средства и пшеница, а цена на пшеницу в течение времени изменяется. Цель этой фирмы - покупать и продавать пшеницу, чтобы максимизировать общую стоимость ее активов на горизонте времени Т.  
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Введем следующие обозначения:
+ 
+{Т} = горизонт времени,\\
+{х(t)} = остаток денежных средств в долларах в момент времени t,\\
+{у(t)} = баланс пшеницы в бушелях в момент времени t,\\ 
+{u(t)} = скорость покупки пшеницы в бушелях за единицу времени; отрицательная покупка означает продажу,\\
+{р(t)} = цена пшеницы в долларах за бушель в момент времени t,\\
+{r} = постоянная положительная процентная ставка, заработанная на денежном балансе,\\
+{h(у)} = стоимость за время хранения пшеницы.
+ 
+В этом разделе мы разрешаем {х} и {у} принимать отрицательные значения, допускаются значения денег и короткие продажи пшеницы.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-see \ref{fig:five over x}
+% \label{e:one_more} - это был пример. Надо заменять one_more на уникальное буквосочетание, кратко отражающее суть уравнения:
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Запишем уравнения состояния:
+\begin{align}
+    \Dot{x} & = r x - h(y) - p v,\, x(0) = x_{0} \\
+    \Dot{y} & = v, \, y(0) = y_{0} \label{e:one_more} \\
+    - v_2 & \le v(t) \le v_1,
+\end{align}    
+где {v1} и {v2} неотрицательные постоянные. Задача состоит в том, чтобы
+% вообще-то, это не по-русски, и надо переписать по-другому:
+\[
+  \mathrm{maximize} [J = x(T) + p(T) y(T)]
+\]
+с учетом (3.1) - (3.3). Обратите внимание, что проблема в линейной форме Майера.
+% Не все знают, что такое линейная форма Майера, и почему это хорошо. Об этом стоит написать в главе про основные понятия и теоремы.
+
+\subsection{Решение по Принципу максимума Понтрягина}
+
+Составим гамельтониан и лангранжиан. 
+\begin{align}
+    \mathcal{H} & = f_{1} (r x - h(y) - p v) + f_{2} (v),\\
+    \mathcal{L} & = a_{0} (-x(T) - p(T) y(T)),\\
+\end{align} 
+Запишем условия для сопряженных переменных и условия трансверсальности.
+\begin{align}
+    \Dot{f_{1}} & = -H x = -r f1,\\
+    \Dot{f_{2}} & = -H y = h'(y) f1,\\
+    {f_{1}(T)} = - {L}x(T)=a_{0},\\
+    {f_{2}(T)} = - {L}y(T)=a_{0} p(T),
+\end{align} 
+
+Условия максимума функции Понтрягина.
+\begin{align}
+    (f_{2} - f_{1} p)v\to \mathrm{max}
+\end{align} 
+
+Функция переключения:
+$g = (f_{2} - p)$\\
+
+"Bang-bang" функция определяется следующим образом:
+
+\begin{align}
+v* = 
+ \begin{cases}
+   v_{1}, &\text{g>0}\\
+   -v_{2}, &\text{g<0}\\
+   [-v_{2},v_{1}], &\text{g=0}
+ \end{cases}
+\end{align}
+
+
+???
+
+\subsection{Модель продолжительной торговли пшеницей}
+Уравнения (3.1), (3.2) и (3.12) определяют двухточечную краевую задачу, которая обычно требует процедуры численного решения. В этом разделе мы предполагаем специальную форму для функции хранения h (y), чтобы иметь возможность получить решение в замкнутой форме.
+
+В данном случае мы используем следующие условия:\\
+ Стоимость за время хранения пшеницы $$ h(y) = \frac{1}{2}|y|$$\\
+постоянная положительная процентная ставка, заработанная на денежном балансе $$ r = 0 $$,\\
+остаток денежных средств в долларах в момент времени t $$ x(0) = 10$$,\\
+баланс пшеницы в бушелях в момент времени t $$ y(0) = 0$$,\\
+скорость покупки пшеницы в бушелях за единицу времени; отрицательная покупка означает продажу $$ V1 = V2 = l $$,\\
+горизонт времени $$ T = 6 $$,\\
+цена пшеницы в долларах за бушель в момент времени t
+\begin{displaymath}
+p(t) =\left\{ \begin{array}{ll}
+ 3 & \textrm{если $0 \le t\le 3$}\\
+ 4 & \textrm{если $4  \le t  \le 6$}
+  \end{array} \right.
+\end{displaymath}
+
+
+решение:\\
+
+Запишем уравнения состояния:
+\begin{align}
+    \Dot{x} & = - \frac{1}{2}|y| - p v,\, x(0) = 10 \\
+    \Dot{y} & = v, \, y(0) = y_{0} \label{e:one_more} \\
+    - v_2 & \le v(t) \le v_1,
+\end{align}     
+
+Составим гамельтониан. 
+\begin{align}
+    \mathcal{H} & = f_{1} (- \frac{1}{2}|y| - p v) + f_{2} (v)
+\end{align} 
+
+Запишем условия для сопряженных переменных и условия трансверсальности.
+\begin{align}
+    \Dot{f_{1}} & = -H x = 0,\\
+    \Dot{f_{2}} & = -H y =  \frac{1}{2}\frac{|y|}{y},\\
+    {f_{1}(6)} = 1,\\
+    {f_{2}(6)} = 4,
+\end{align} 
+
+Условия максимума функции Понтрягина.
+\begin{align}
+    (f_{2} - f_{1} p)v\to \mathrm{max}
+\end{align} 
+
+Анализ:
+$$f_1=1$$
+$$\Dot {f_{1}}= \frac{1}{2}\frac{|y|}{y}$$
+$$f_{2}(6)=4$$ 
+
+"Bang-bang" функция определяется следующим образом:
+
+\begin{align}
+v* = 
+ \begin{cases}
+   1, &\text{g>0}\\
+   -1, &\text{g<0}\\
+   [-1,1], &\text{g=0}
+ \end{cases}
+\end{align}
+
+
+
+
+
+
+
+
+
 
 \subsection{SubSection Title}
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
