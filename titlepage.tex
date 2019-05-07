@@ -1,31 +1,60 @@
+%не хотят работать функции для задания шрифта и полей 
+%documentclass[a4paper]{article}
+%usepackage[14pt]{extsizes} % для того чтобы задать нестандартный 14-ый размер шрифта
+%usepackage[utf8]{inputenc}
+%usepackage[russian]{babel}
+%usepackage{setspace,amsmath}
+%usepackage[left=20mm, top=15mm, right=15mm, bottom=15mm, nohead, footskip=10mm]{geometry} % настройки полей документа
 \begin{titlepage}
-    \begin{center}
-        \vspace*{1cm}
-        
-        \Huge
-        \textbf{Дипломная работа}
-        
-        \vspace{0.5cm}
-        \LARGE
-        Задача оптимального управления биржевой торговлей зерном
-        
-        \vspace{1.5cm}
-        
-        \textbf{Александра Олеговна Дрянова}
-        
-        \vfill
-        
-        Научный руководитель: д.ф.м.н. Иванов И.И.
-        
-        \vspace{0.8cm}
-        
-        \includegraphics[width=0.4\textwidth]{university}
-        
-        \Large
-        Факультет математики\\
-        Иркутский Государственный Университет\\
-        Россия\\
-        Май 2019
-        
-    \end{center}
+%begin{document}
+\begin{center}
+\hfill \break
+\normalsize{Министерство образования и науки Российской Федерации \\ федеральное государственное бюджетное образовательное учреждение}\\
+ 
+\normalsize{высшего образования}\\
+\normalsize{«Иркутский государственный университет» }\\
+\normalsize{(ФГБОУ ВО «ИГУ»)}\\
+\hfill \break
+\normalsize{Институт математики, экономики и информатики}\\
+\normalsize{Кафедра Вычислительной математики и оптимизации}\\
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\large{\textbf{ВЫПУСКНАЯ КВАЛИФИКАЦИОННАЯ РАБОТА
+БАКАЛАВРА}}\\
+\hfill \break
+\normalsize{
+Направление  01.03.02 «Прикладная математика и инфор-матика»\\
+профиль Математическое и компьютерное модели-рование }\\
+\hfill \break
+ 
+\normalsize{ОПТИМАЛЬНОЕ УПРАВЛЕНИЕ В МОДЕЛЯХ ТРЕЙДИНГА} 
+\end{center}
+\hfill \break
+\hfill \break
+\begin{flushright} % сдвигает содержимое окружения вправо
+\begin{tabular}{p{.5\textwidth}} % делает таблицу из одной колонки шириной в половину текста
+
+
+Студентки 4 курса очного отделения\\
+группы 2421\\
+Дряновой Александры Олеговны\\\
+
+Руководитель:\\
+к. в.м. и о., доцент\\
+\rule{3cm}{0.25pt}  Сорокин С.П.\\\
+
+Допущена к защите\\
+Зав. кафедрой, д. ф.-м. н., профессор\\
+ \rule{3cm}{0.25pt}  Дыхта В.А.\\\\
+
+\end{tabular}
+\end{flushright}
+\hfill \break
+\begin{center} Иркутск - 2019 \end{center}
+\pagestyle{empty} % % выключаем отображение номера для этой страницы
 \end{titlepage}
+%end{document}
