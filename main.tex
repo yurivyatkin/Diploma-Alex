@@ -1,5 +1,7 @@
 % From https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1):_Basic_Structure 
-\documentclass[12pt,twoside]{report}
+\documentclass{report}%[twoside]{report}
+
+\usepackage[14pt]{extsizes} % для того чтобы задать нестандартный 14-ый размер шрифта
 
 %Russian-specific packages
 %--------------------------------------
@@ -17,9 +19,21 @@
 
 \usepackage{graphicx}
 \graphicspath{ {images/} }
+
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+
+\usepackage[a4paper, left=25mm, top=20mm, right=15mm, bottom=20mm, nohead, footskip=10mm]{geometry} % настройки полей документа
+
+% Это нужно для задания межстрочного интервала:
+\usepackage{setspace}
+%\doublespacing
+%\onehalfspacing
+% - увеличенный интервал разрушает титульную страницу, но выход найден:
+% см. titlepage.tex в начале и конце!
+
+\iffalse
+% Здесь мы настроили наши красивые колонтитулы:
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
@@ -31,17 +45,32 @@
 \fancyfoot[CO,RE]{А.О.Дрянова}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
+% - колонтитулы съехали после установки настроек полей (пакет geometry выше)
+% Нужно понять, какими они должны быть 
+ 
+\sloppy \textwidth=17cm \textheight=25cm \topmargin=-1.8cm
+\fi
+\oddsidemargin=0mm \evensidemargin=0cm
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{cases}
+\usepackage{fancyhdr}
 
 \usepackage[style=authoryear,sorting=none]{biblatex}
 \addbibresource{references.bib}
 
-\title{Дипломная работа}
-\author{Александра Дрянова}
-\date{Май 2019}
+% \title{Дипломная работа}
+% \author{Александра Дрянова}
+% \date{Май 2019}
+\fancypagestyle{phdthesis}{%
+\fancyhf %clear all headers and footers fields
+\fancyhead[R]{\thepage} %prints the page number on the right side of the header
+}
+
+
+
+%\pagestyle{phdthesis}
 
 \begin{document}
 
@@ -52,7 +81,8 @@
 %\listoffigures
 
 %\listoftables
-
+\setcounter{page}{2}
+%\pagestyle{plain}
 \chapter{Введение}
 \input{chapters/introduction}
 
