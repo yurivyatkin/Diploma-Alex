@@ -37,40 +37,53 @@ a - const\\
 Добавим в исходную задачу коэффициент влияния условий хранения как функцию.\\
 Введем новые обозначения:\\
 {a(t)} = коэффициент влияния условий хранения на зерно.\\
-a(t) = [0, 1]\\
+a(t) > 0\\
  Наша задача запишется так:\\
 
 \begin{align}
-    \Dot{y} & = v(t) - (1 - a(t)) y(t), & y(t_{0}) = y_{0} \\
-    \Dot{x} & = r x - h(y) - p(t) v(t), & x(t_{0}) = x_{0} \\
+    \Dot{y} & = v - a(t) y, & y(t_{0}) = y_{0} \\
+    \Dot{x} & = r x - h(y) - p(t) v, & x(t_{0}) = x_{0} \\
     \mathcal{J} & = x(T) + p(T) y(T) \to \mathrm{max}
 \end{align}
 
 \begin{align}
     & v(t) \in [-v_{1}, v_{2}], \\
-    & a(t) = [0, 1]\\
-    & a > 0
+    & a(t) > 0
 \end{align}
 
 Функция Понтрягина и сопряженная система имеют вид. 
 \begin{align}
-    \mathcal{H} & = \psi_{1} (r x- h(y) - p(t) v(t)) + \psi_{2} (v(t) - (1-a(t))y(t))\\
-    \Dot{\psi_{1}} & = -H x = -r \psi_{1},\\
-    \Dot{\psi_{2}} & = -H y = h'(y) \psi_{1} + (1- a(t))\psi_{2}
+    \mathcal{H} & = \psi_{1} \big( r x- h(y) - p(t) v \big) + \psi_{2} \big( v - a(t)y \big)\\
+    \Dot{\psi_{1}} & = -H_x = -r \psi_{1},\\
+    \Dot{\psi_{2}} & = -H_y = h'(y) \psi_{1} + \big(1- a(t)\big)\psi_{2}
 \end{align} 
 
 Запишем  условия трансверсальности.
 \begin{align}
-    {\psi_{1}(T)} = - {L}x(T)= 1,\\
-    {\psi_{2}(T)} = - {L}y(T)= p(T)
+    {\psi_{1}(T)} = \mathcal{- L}_x(T)= 1,\\
+    {\psi_{2}(T)} = \mathcal {- L}_y(T)= p(T)
 \end{align} 
 
 
 Условия максимума функции Понтрягина:\\
 \begin{align}
-     (\psi_{2} - p(t)) \to \mathrm{max}\\
+     (\psi_{2} - p(t)\psi_{1})v \to \mathrm{max}
 \end{align}
 
+
+${v*}$ - типа "Bang-bang" определяется функцией переключения\\
+$g = \big (\psi_{2} - p(t)\psi_{1} \big)$ и выглядит следующим образом:
+
+\begin{align}
+v* = 
+ \begin{cases}
+   v_{1}, &\text{ $\psi_{2} > p(t)\psi_{1}$}\\
+   -v_{2}, &\text{$\psi_{2} < p(t)\psi_{1}$}\\
+   [-v_{2},v_{1}], &\text{$\psi_{2} = p(t)\psi_{1}$}
+ \end{cases}
+\end{align}
+
+Далее переходим к конкретике: 
 \section{Третья модификация задачи}
 
 Добавим в исходную задачу коэффициент влияния условий хранения и противодействие плохим условиям хранения.\\
