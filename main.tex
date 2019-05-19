@@ -1,113 +1,73 @@
-% From https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1):_Basic_Structure 
-\documentclass{report}%[twoside]{report}
 
-\usepackage[14pt]{extsizes} % для того чтобы задать нестандартный 14-ый размер шрифта
-
-%Russian-specific packages
-%--------------------------------------
+\documentclass[14pt]{extarticle} %Класс позволяет использовать базовые шрифты бОльших размеров
+\usepackage[utf8x]{inputenc} %кодировка файла макета utf8
 \usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian]{babel}
-\usepackage{csquotes}
-%--------------------------------------
-
-%Hyphenation rules
-%--------------------------------------
-\usepackage{hyphenat}
-\hyphenation{ма-те-ма-ти-ка вос-ста-нав-ли-вать}
-%--------------------------------------
-
-\usepackage{graphicx}
-\graphicspath{ {images/} }
-
-\usepackage{caption}
-\usepackage{subcaption}
-
-\usepackage[a4paper, left=25mm, top=20mm, right=15mm, bottom=20mm, nohead, footskip=10mm]{geometry} % настройки полей документа
-
-% Это нужно для задания межстрочного интервала:
-\usepackage{setspace}
-%\doublespacing
-%\onehalfspacing
-% - увеличенный интервал разрушает титульную страницу, но выход найден:
-% см. titlepage.tex в начале и конце!
-
-\iffalse
-% Здесь мы настроили наши красивые колонтитулы:
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[RO,LE]{Оптимальная торговля зерном}
-\setlength{\headheight}{15pt}% https://tex.stackexchange.com/a/327298/7775
-\fancyfoot{}
-\fancyfoot[LE,RO]{\thepage}
-\fancyfoot[LO,CE]{Глава \thechapter}
-\fancyfoot[CO,RE]{А.О.Дрянова}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-% - колонтитулы съехали после установки настроек полей (пакет geometry выше)
-% Нужно понять, какими они должны быть 
- 
-\sloppy \textwidth=17cm \textheight=25cm \topmargin=-1.8cm
-\fi
-\oddsidemargin=0mm \evensidemargin=0cm
+\usepackage[russian]{babel} 
+\usepackage[left=25mm,right=15mm,top=12mm,bottom=20mm]{geometry} %Попытка разобраться с полями страниц
+\usepackage{ntheorem} %окружение для настройки теорем 
+\usepackage{graphicx} %работа с рисунками
+\usepackage[labelsep=period,figurewithin=none,tablewithin=none]{caption} %подписи к объектам (рисунки, таблицы)
+\usepackage{listings} %работа с листингами
+\usepackage{indentfirst} %отступ первого абзаца в разделе
+\usepackage{enumitem} %настройка маркированных и нумерованных списков (см. примеры настройки в тексте)
+\usepackage{url} %формирование ссылок на электронные источники
+\usepackage{fancyhdr} %Настройка нумерации страниц
+\usepackage{tocloft} %Настройка заголовка для содержания
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{cases}
-\usepackage{fancyhdr}
 
-\usepackage[style=authoryear,sorting=none]{biblatex}
-\addbibresource{references.bib}
-
-% \title{Дипломная работа}
-% \author{Александра Дрянова}
-% \date{Май 2019}
-\fancypagestyle{phdthesis}{%
-\fancyhf %clear all headers and footers fields
-\fancyhead[R]{\thepage} %prints the page number on the right side of the header
-}
-
-
-
-%\pagestyle{phdthesis}
+\input{settings.tex}
 
 \begin{document}
 
 \input{titlepage}
 
-\tableofcontents
-
-%\listoffigures
-
-%\listoftables
 %Настройка нумерации страниц
-\fancyhf{} % clear all header and footers
-\renewcommand{\headrulewidth}{0pt} % remove the header rule
-\rfoot{\small \thepage}
-\pagestyle{fancy}
-
 \setcounter{page}{2}
-%\pagestyle{plain}
-\chapter{Введение}
+
+%%%----------------------Содержание дипломной работы%%%
+\renewcommand{\baselinestretch}{1.5}
+\normalsize
+%-------------
+%Содержание
+%-------------
+\renewcommand{\contentsname}{СОДЕРЖАНИЕ}
+\noindent\tableofcontents
+
+%-------------
+%Основная часть
+%-------------
+\mynonumbersection{ВВЕДЕНИЕ}
 \input{chapters/introduction}
 
-\chapter{Математическое моделирование }
+\mysection{Математическое моделирование }
+\input{chapters/chapter01}
+
+\mysection{Исходная задача и ее решение}
 \input{chapters/chapter02}
 
-\chapter{Исходная задача и ее решение}
+\mysection{Варианты задачи и решения}
 \input{chapters/chapter03}
 
-\chapter{Варианты задачи и решения}
-\input{chapters/chapter04}
-
-\chapter{Заключение}
+%-------------
+%Заключение 
+%-------------
+\mynonumbersection{Заключение}
 \input{chapters/conclusion}
 
-\appendix
-\chapter{Приложение: Полезные формулы}
+\addappendix{Приложение: Полезные формулы}
 \input{chapters/appendix}
 
-\printbibliography
+%-------------
+%Список литературы
+%-------------
+\newpage
+%Для включения в диплом списка литературы подключается файл literature.bib
+%В нем приведены наиболее часто встречающиеся типы библиографических ссылок
+\renewcommand{\refname}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
+\addcontentsline{toc}{section}{\refname}
+\bibliography{literature}
 
 \end{document}
